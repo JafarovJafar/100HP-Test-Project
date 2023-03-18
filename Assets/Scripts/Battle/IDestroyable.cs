@@ -2,7 +2,7 @@
 
 public interface IDestroyable
 {
-    event Action Destroyed;
+    event Action<IDestroyable> Destroyed;
     
     bool IsDestroyed { get; }
 

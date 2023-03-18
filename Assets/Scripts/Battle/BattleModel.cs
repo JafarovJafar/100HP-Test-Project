@@ -22,8 +22,11 @@ namespace Battle
             _enemiesSpawner.Activate();
         }
 
-        private void HeroBase_Destroyed()
+        private void HeroBase_Destroyed(IDestroyable destroyable)
         {
+            _enemiesSpawner.DeActivate();
+            _enemiesSpawner.ReleaseAllEnemies();
+
             Finished?.Invoke();
         }
 
@@ -42,6 +45,7 @@ namespace Battle
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.L)) Lose();
+            else if (Input.GetKeyDown(KeyCode.D)) _heroBase.TakeDamage(1f);
         }
 #endif
     }

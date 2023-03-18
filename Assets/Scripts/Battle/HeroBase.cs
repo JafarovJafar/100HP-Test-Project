@@ -6,11 +6,15 @@ namespace Battle
 {
     public class HeroBase : MonoBehaviour, IHero
     {
-        public event Action Destroyed;
+        public event Action<IDestroyable> Destroyed;
+        public event Action<float> TakenDamage;
 
         public Vector3 Position => _vars.Transform.position;
+        public bool IsDestroyed => _isDestroyed;
 
         [SerializeField] private HeroVars _vars;
+
+        private bool _isDestroyed;
 
         private StateMachine _stateMachine = new StateMachine();
 
@@ -25,6 +29,27 @@ namespace Battle
             _vars.AttackTrigger.Entered += AttackTrigger_Entered;
 
             ChangeDefaultState();
+        }
+
+        public void TakeDamage(float damage)
+        {
+            _vars.Health -= damage;
+
+            if (_vars.Health <= 0f)
+            {
+                Destroy();
+            }
+            else
+            {
+                TakenDamage?.Invoke(damage);
+            }
+        }
+
+        public void Destroy()
+        {
+            _isDestroyed = true;
+            _stateMachine.ChangeState(new HeroBaseDeathState(_vars));
+            Destroyed?.Invoke(this);
         }
 
         public void UpgradeAttackRadius() => _vars.AttackTrigger.Upgrade();

@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61a99e891c93b048b0b1bf9f611979b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnInterval: 3
+  _spawnInterval: 1
   _spawnPointsHelper:
     _radius: 40
 --- !u!114 &970988091 stripped

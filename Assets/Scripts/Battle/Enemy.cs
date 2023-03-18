@@ -4,9 +4,9 @@ using Battle.Enemies;
 
 namespace Battle
 {
-    public class Enemy : MonoBehaviour, IPoolable, IEnemy
+    public class Enemy : MonoBehaviour, IEnemy
     {
-        public event Action Destroyed;
+        public event Action<IDestroyable> Destroyed;
         public event Action<float> TakenDamage;
 
         [SerializeField] private EnemyVars _vars;
@@ -42,22 +42,44 @@ namespace Battle
         {
             _vars.Health -= damage;
 
-            if (_vars.Health < 0f)
+            if (_vars.Health <= 0f)
             {
                 Destroy();
+            }
+            else
+            {
+                TakenDamage?.Invoke(damage);
             }
         }
 
         public void Destroy()
         {
+            if (_isDestroyed) return;
+            
             _stateMachine.ChangeState(new EnemyDieState(_vars, DeActivate));
             _isDestroyed = true;
-            Destroyed?.Invoke();
+            Destroyed?.Invoke(this);
         }
 
         private void ChangeDefaultState() => _stateMachine.ChangeState(new EnemyDefaultState(_vars));
 
         private void FixedUpdate() => _stateMachine.FixedTick();
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.transform.TryGetComponent(out IHero hero))
+            {
+                _vars.CanAttackHero = true;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.transform.TryGetComponent(out IHero hero))
+            {
+                _vars.CanAttackHero = false;
+            }
+        }
 
         private void OnDisable()
         {
@@ -65,6 +87,7 @@ namespace Battle
             
             _vars.Health = _startHealth;
             _vars.RootTransform.gameObject.SetActive(true);
+            _vars.CanAttackHero = false;
         }
 
         private void Awake()

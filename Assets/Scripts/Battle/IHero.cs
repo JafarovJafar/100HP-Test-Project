@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public interface IHero
+public interface IHero : IDamageable, IDestroyable
 {
-    event Action Destroyed;
-
     Vector3 Position { get; }
 }

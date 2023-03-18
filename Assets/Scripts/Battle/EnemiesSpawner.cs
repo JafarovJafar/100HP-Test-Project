@@ -7,23 +7,17 @@ namespace Battle
     {
         [SerializeField] private float _spawnInterval = 1f;
         [SerializeField] private SpawnPointsHelper _spawnPointsHelper;
-        
-        public IEnemy LastSpawnedEnemy => _lastSpawnedEnemy;
+
         public List<IEnemy> SpawnedEnemies => _spawnedEnemies;
 
-        private IEnemy _lastSpawnedEnemy;
         private float _lastSpawnTime;
-        
-        private List<IEnemy> _spawnedEnemies;
+
+        private List<IEnemy> _spawnedEnemies = new List<IEnemy>();
 
         private IEnemyFactory _factory;
 
-        private Transform _transform;
-        
         public void Init(IEnemyFactory factory)
         {
-            _transform = transform;
-            
             _factory = factory;
         }
 
@@ -37,13 +31,29 @@ namespace Battle
             enabled = false;
         }
 
+        public void ReleaseAllEnemies()
+        {
+            for (int i = _spawnedEnemies.Count - 1; i >= 0; i--)
+            {
+                _spawnedEnemies[i].Destroy();
+            }
+        }
+
         private void SpawnEnemy()
         {
             (Vector3 position, Quaternion rotation) = _spawnPointsHelper.GetRandomPoint();
-            
+
             IEnemy enemy = _factory.GetRandom();
             enemy.SetPosition(position);
             enemy.SetRotation(rotation);
+            enemy.Destroyed += Enemy_Destroyed;
+            _spawnedEnemies.Add(enemy);
+        }
+
+        private void Enemy_Destroyed(IDestroyable enemy)
+        {
+            enemy.Destroyed -= Enemy_Destroyed;
+            _spawnedEnemies.Remove(enemy as IEnemy);
         }
 
         private void Update()

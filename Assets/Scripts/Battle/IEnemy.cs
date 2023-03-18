@@ -2,7 +2,7 @@
 
 namespace Battle
 {
-    public interface IEnemy : IDestroyable, IDamageable
+    public interface IEnemy : IDestroyable, IDamageable, IPoolable
     {
         Vector3 Position { get; }
         

@@ -7,6 +7,7 @@ namespace Battle.Enemies
         private EnemyVars _vars;
 
         private Vector2 _modeDirection;
+        private float _lastAttackTime;
 
         public EnemyDefaultState(EnemyVars vars)
         {
@@ -29,6 +30,19 @@ namespace Battle.Enemies
             _modeDirection = _vars.Hero.Position - _vars.Transform.position;
             _modeDirection.Normalize();
             _vars.Rigidbody.velocity = _modeDirection * _vars.MoveSpeed;
+
+            if (_vars.CanAttackHero)
+            {
+                if (Time.time > _lastAttackTime + _vars.AttackInterval)
+                {
+                    _lastAttackTime = Time.time;
+                    _vars.Hero.TakeDamage(_vars.Strength);
+                }
+            }
+            else
+            {
+                _lastAttackTime = 0f;
+            }
         }
 
         public void Exit()
