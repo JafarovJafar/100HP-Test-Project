@@ -1,6 +1,6 @@
 ﻿namespace Battle.Projectiles
 {
-    public class ProjectileFlyState : IState
+    public class ProjectileDieState : IState
     {
         public void Enter()
         {

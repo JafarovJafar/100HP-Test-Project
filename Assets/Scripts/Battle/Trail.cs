@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-public class Trail : MonoBehaviour
+namespace Battle
 {
-    private GameObject _gameObject;
-
-    public void Activate() => _gameObject.SetActive(true);
-    public void DeActivate() => _gameObject.SetActive(false);
-
-    private void Awake()
+    public class Trail : MonoBehaviour
     {
-        _gameObject = gameObject;
+        private GameObject _gameObject;
+
+        public void Activate() => _gameObject.SetActive(true);
+        public void DeActivate() => _gameObject.SetActive(false);
+
+        private void Awake()
+        {
+            _gameObject = gameObject;
+        }
     }
 }

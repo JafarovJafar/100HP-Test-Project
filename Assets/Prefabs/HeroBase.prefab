@@ -116,6 +116,52 @@ Transform:
   m_Father: {fileID: 7038679295140658984}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2654188438690080186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8439026047294945747}
+  - component: {fileID: 4905299830457852646}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8439026047294945747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654188438690080186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7038679295140658984}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4905299830457852646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654188438690080186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caaec2e90d8f03343b9ba8d6d4076581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frequencyStats: {fileID: 11400000, guid: c1f0bbc4a3b902841b494ddc1d036723, type: 2}
+  _strengthStats: {fileID: 11400000, guid: b2d494a0ebdee5944bc576df102f1e49, type: 2}
 --- !u!1 &7038679295140658990
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +192,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1681705168809750160}
+  - {fileID: 8439026047294945747}
   - {fileID: 8032816017948602542}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -163,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vars:
+    Weapon: {fileID: 4905299830457852646}
     AttackTrigger: {fileID: 3887388357943368241}
     EnemiesInRange: []
 --- !u!1 &8898655249075451301
@@ -281,7 +329,7 @@ Transform:
   m_Children:
   - {fileID: 6067360055323592965}
   m_Father: {fileID: 7038679295140658984}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3887388357943368241
 MonoBehaviour:
@@ -295,9 +343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ece6bd139cb01a40a26c90ec9057f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 0}
-  _spriteTransform: {fileID: 0}
-  _radius: 0
+  _stats: {fileID: 11400000, guid: 77f479630f76d924b83ea2b5eda4374d, type: 2}
+  _collider: {fileID: 806144276468835906}
+  _spriteTransform: {fileID: 6067360055323592965}
+  _radius: 10
 --- !u!58 &806144276468835906
 CircleCollider2D:
   m_ObjectHideFlags: 0

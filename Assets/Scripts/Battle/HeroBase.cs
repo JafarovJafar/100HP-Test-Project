@@ -10,16 +10,15 @@ namespace Battle
 
         [SerializeField]private HeroVars _vars;
 
-        private StateMachine _stateMachine;
-
-        private GameObject _gameObject;
-        private Transform _transform;
+        private StateMachine _stateMachine = new StateMachine();
 
         public void Init()
         {
-            _gameObject = gameObject;
-            _transform = transform;
+            _vars.GameObject = gameObject;
+            _vars.Transform = transform;
 
+            _vars.Weapon.Init();
+            
             _vars.AttackTrigger.Init();
             _vars.AttackTrigger.Entered += AttackTrigger_Entered;
         }
@@ -33,11 +32,5 @@ namespace Battle
         
         private void Update() => _stateMachine.Tick();
         private void FixedUpdate() => _stateMachine.FixedTick();
-
-        private void Awake()
-        {
-            _gameObject = gameObject;
-            _transform = transform;
-        }
     }
 }

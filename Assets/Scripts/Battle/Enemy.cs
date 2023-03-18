@@ -20,14 +20,16 @@ namespace Battle
 
         public void Activate()
         {
+            _gameObject.SetActive(true);
             ChangeDefaultState();
         }
 
         public void DeActivate()
         {
-
+            _gameObject.SetActive(false);
         }
 
+        public void SetParent(Transform parent) => _transform.parent = parent;
         public void SetPosition(Vector3 position) => _transform.position = position;
         public void SetRotation(Quaternion rotation) => _transform.rotation = rotation;
 
