@@ -32,7 +32,7 @@ namespace Battle
         public void SetPosition(Vector3 position) => _vars.Transform.position = position;
         public void SetRotation(Quaternion rotation) => _vars.Transform.rotation = rotation;
 
-        private void ChangeFlyState() => _stateMachine.ChangeState(new ProjectileFlyState(_vars, DeActivate));
+        private void ChangeFlyState() => _stateMachine.ChangeState(new ProjectileFlyState(_vars, ChangeDestroyState));
         private void ChangeDestroyState() => _stateMachine.ChangeState(new ProjectileDieState(_vars, DeActivate));
 
         private void FixedUpdate() => _stateMachine.FixedTick();

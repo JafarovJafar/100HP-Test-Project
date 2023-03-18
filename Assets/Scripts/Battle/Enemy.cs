@@ -50,7 +50,6 @@ namespace Battle
 
         public void Destroy()
         {
-            Debug.Log(222);
             _stateMachine.ChangeState(new EnemyDieState(_vars, DeActivate));
             _isDestroyed = true;
             Destroyed?.Invoke();

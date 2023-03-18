@@ -14,12 +14,14 @@ namespace Battle.Projectiles
         public ProjectileFlyState(ProjectileVars vars, Action lifeTimeSpent)
         {
             _vars = vars;
+            _lifeTimeSpent = lifeTimeSpent;
         }
         
         public void Enter()
         {
             _vars.Rigidbody.isKinematic = false;
             _vars.Collider.enabled = true;
+            _vars.Trail.Activate();
 
             _startTime = Time.time;
         }

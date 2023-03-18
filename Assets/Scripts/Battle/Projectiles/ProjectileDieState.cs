@@ -22,6 +22,7 @@ namespace Battle.Projectiles
             _vars.Rigidbody.isKinematic = true;
             _vars.Collider.enabled = false;
             _vars.DestroyParticle.Play();
+            _vars.Trail.DeActivate();
         }
 
         public void Tick()
