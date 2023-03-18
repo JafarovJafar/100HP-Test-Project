@@ -15,10 +15,11 @@ namespace Battle
         {
             _heroBase.Init();
             _heroBase.Destroyed += HeroBase_Destroyed;
-            
+
             _enemiesFactory.Init(_heroBase);
-            
             _enemiesSpawner.Init(_enemiesFactory);
+
+            _enemiesSpawner.Activate();
         }
 
         private void HeroBase_Destroyed()
@@ -33,7 +34,7 @@ namespace Battle
             {
                 enemy.Destroy();
             }
-            
+
             Finished?.Invoke();
         }
 

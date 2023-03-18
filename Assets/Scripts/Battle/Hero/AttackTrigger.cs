@@ -1,5 +1,4 @@
 using System;
-using Battle;
 using UnityEngine;
 
 namespace Battle.Hero
@@ -13,6 +12,8 @@ namespace Battle.Hero
         [SerializeField] private Transform _spriteTransform;
         [SerializeField] private float _radius;
 
+        private int _currentLevel;
+
         private GameObject _gameObject;
 
         public void Init()
@@ -25,7 +26,19 @@ namespace Battle.Hero
         public void Activate() => _gameObject.SetActive(true);
         public void DeActivate() => _gameObject.SetActive(false);
 
-        private void SetRadius(float radius) //метод сделан на будущее, чтобы можно было увеличивать радиус атаки
+        public void Upgrade()
+        {
+            if (_currentLevel == _stats.Values.Count - 1)
+            {
+                Debug.LogError("некорректная попытка апгрейда!");
+                return;
+            }
+
+            _currentLevel++;
+            SetRadius(_stats.Values[_currentLevel]);
+        }
+
+        private void SetRadius(float radius)
         {
             _collider.radius = radius;
             _spriteTransform.localScale = Vector2.one * radius * 2f;

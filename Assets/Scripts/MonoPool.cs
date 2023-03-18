@@ -9,13 +9,7 @@ public class MonoPool : MonoBehaviour
     private Dictionary<IPoolable, List<IPoolable>> _pool = new Dictionary<IPoolable, List<IPoolable>>();
 
     private Transform _transform;
-    
-    public void Init()
-    {
-        _transform = transform;
-        _instance = this;
-    }
-    
+
     public T Get<T>(T prefab) where T : MonoBehaviour, IPoolable
     {
         T item;
@@ -48,5 +42,11 @@ public class MonoPool : MonoBehaviour
                 poolable.DeActivate();
             }
         }
+    }
+    
+    private void Awake()
+    {
+        _transform = transform;
+        _instance = this;
     }
 }

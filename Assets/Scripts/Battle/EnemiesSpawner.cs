@@ -1,25 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Battle.Enemies;
 
 namespace Battle
 {
     public class EnemiesSpawner : MonoBehaviour
     {
+        [SerializeField] private float _spawnInterval = 1f;
         [SerializeField] private SpawnPointsHelper _spawnPointsHelper;
         
-        public Enemy LastSpawnedEnemy => _lastSpawnedEnemy;
-        public List<Enemy> SpawnedEnemies => _spawnedEnemies;
+        public IEnemy LastSpawnedEnemy => _lastSpawnedEnemy;
+        public List<IEnemy> SpawnedEnemies => _spawnedEnemies;
 
-        private Enemy _lastSpawnedEnemy;
+        private IEnemy _lastSpawnedEnemy;
+        private float _lastSpawnTime;
+        
+        private List<IEnemy> _spawnedEnemies;
 
-        private List<Enemy> _spawnedEnemies;
-
-        private EnemiesFactory _factory;
+        private IEnemyFactory _factory;
 
         private Transform _transform;
         
-        public void Init(EnemiesFactory factory)
+        public void Init(IEnemyFactory factory)
         {
             _transform = transform;
             
@@ -28,21 +29,30 @@ namespace Battle
 
         public void Activate()
         {
-
+            enabled = true;
         }
 
         public void DeActivate()
         {
-
+            enabled = false;
         }
 
         private void SpawnEnemy()
         {
-            SpawnPoint spawnPoint = _spawnPointsHelper.GetRandom();
+            (Vector3 position, Quaternion rotation) = _spawnPointsHelper.GetRandomPoint();
             
-            Enemy enemy = _factory.GetRandom();
-            enemy.SetPosition(spawnPoint.Position);
-            enemy.SetRotation(spawnPoint.Rotation);
+            IEnemy enemy = _factory.GetRandom();
+            enemy.SetPosition(position);
+            enemy.SetRotation(rotation);
+        }
+
+        private void Update()
+        {
+            if (Time.time > _lastSpawnTime + _spawnInterval)
+            {
+                SpawnEnemy();
+                _lastSpawnTime = Time.time;
+            }
         }
     }
 }

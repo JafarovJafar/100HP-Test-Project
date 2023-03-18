@@ -8,7 +8,7 @@ namespace Battle
     {
         public event Action Destroyed;
 
-        [SerializeField]private HeroVars _vars;
+        [SerializeField] private HeroVars _vars;
 
         private StateMachine _stateMachine = new StateMachine();
 
@@ -18,10 +18,14 @@ namespace Battle
             _vars.Transform = transform;
 
             _vars.Weapon.Init();
-            
+
             _vars.AttackTrigger.Init();
             _vars.AttackTrigger.Entered += AttackTrigger_Entered;
         }
+
+        public void UpgradeAttackRadius() => _vars.AttackTrigger.Upgrade();
+        public void UpgradeAttackFrequency() => _vars.Weapon.UpgradeFrequency();
+        public void UpgradeAttackStrength() => _vars.Weapon.UpgradeStrength();
 
         private void AttackTrigger_Entered(Enemy enemy)
         {
@@ -29,7 +33,7 @@ namespace Battle
         }
 
         private void ChangeDefaultState() => _stateMachine.ChangeState(new HeroBaseDefaultState(_vars));
-        
+
         private void Update() => _stateMachine.Tick();
         private void FixedUpdate() => _stateMachine.FixedTick();
     }

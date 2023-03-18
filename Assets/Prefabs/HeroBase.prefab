@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caaec2e90d8f03343b9ba8d6d4076581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frequencyStats: {fileID: 11400000, guid: c1f0bbc4a3b902841b494ddc1d036723, type: 2}
+  _shootIntervalStats: {fileID: 11400000, guid: c1f0bbc4a3b902841b494ddc1d036723, type: 2}
   _strengthStats: {fileID: 11400000, guid: b2d494a0ebdee5944bc576df102f1e49, type: 2}
 --- !u!1 &7038679295140658990
 GameObject:
@@ -210,6 +210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vars:
+    GameObject: {fileID: 0}
+    Transform: {fileID: 0}
     Weapon: {fileID: 4905299830457852646}
     AttackTrigger: {fileID: 3887388357943368241}
     EnemiesInRange: []

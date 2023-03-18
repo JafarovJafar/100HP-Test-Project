@@ -4,7 +4,7 @@ using Battle.Enemies;
 
 namespace Battle
 {
-    public class Enemy : MonoBehaviour, IPoolable, IDamageable, IDestroyable
+    public class Enemy : MonoBehaviour, IPoolable, IEnemy
     {
         public event Action Destroyed;
         public event Action<float> TakenDamage;
