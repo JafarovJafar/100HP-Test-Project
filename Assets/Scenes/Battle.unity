@@ -280,7 +280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61a99e891c93b048b0b1bf9f611979b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnInterval: 1
+  _spawnInterval: 3
+  _spawnPointsHelper:
+    _radius: 20
 --- !u!114 &970988091 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7038679295140658991, guid: d5953456be44ea04db8d5d1d8f7c19c2, type: 3}
@@ -590,7 +592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dc5b9bba5d41bd81dbd691f522462d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: []
+  _enemiesPrefabs:
+  - {fileID: 8195497920528209238, guid: 24dbad9d78e29e248b4b70290849511c, type: 3}
+  - {fileID: 8195497920528209238, guid: 79448ab64cf959246b507309532256ac, type: 3}
 --- !u!1001 &7038679296086467860
 PrefabInstance:
   m_ObjectHideFlags: 0

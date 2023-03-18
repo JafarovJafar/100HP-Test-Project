@@ -44,7 +44,7 @@ namespace Battle.Hero
             _spriteTransform.localScale = Vector2.one * radius * 2f;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Enemy enemy)) Entered?.Invoke(enemy);
             else Debug.Log("этой коллизии не должно быть");

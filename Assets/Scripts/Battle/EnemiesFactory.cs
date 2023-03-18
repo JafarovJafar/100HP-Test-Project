@@ -17,7 +17,11 @@ namespace Battle
         public IEnemy GetRandom()
         {
             int randomIndex = Random.Range(0, _enemiesPrefabs.Count);
-            Enemy enemy = _enemiesPrefabs[randomIndex];
+            Enemy enemyPrefab = _enemiesPrefabs[randomIndex];
+            
+            Enemy enemy = MonoPool.Instance.Get(enemyPrefab);
+            enemy.SetTarget(_hero);
+            
             return enemy;
         }
     }

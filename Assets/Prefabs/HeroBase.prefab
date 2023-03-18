@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootIntervalStats: {fileID: 11400000, guid: c1f0bbc4a3b902841b494ddc1d036723, type: 2}
   _strengthStats: {fileID: 11400000, guid: b2d494a0ebdee5944bc576df102f1e49, type: 2}
+  _projectilePrefab: {fileID: 1440047954453155221, guid: 9f70c0b1a3be24c4ba3cfb716223aa62, type: 3}
 --- !u!1 &7038679295140658990
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7038679295140658984}
   - component: {fileID: 7038679295140658991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeroBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +311,7 @@ GameObject:
   - component: {fileID: 8032816017948602542}
   - component: {fileID: 3887388357943368241}
   - component: {fileID: 806144276468835906}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +360,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

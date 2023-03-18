@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace Battle.Projectiles
+namespace Battle.Enemies
 {
-    public class ProjectileDieState : IState
+    public class EnemyDieState : IState
     {
-        private ProjectileVars _vars;
+        private EnemyVars _vars;
 
         private Action _finished;
-        
-        public ProjectileDieState(ProjectileVars vars, Action finished)
+
+        public EnemyDieState(EnemyVars vars, Action finished)
         {
             _vars = vars;
             _finished = finished;
@@ -17,22 +17,23 @@ namespace Battle.Projectiles
 
         public void Enter()
         {
-            _vars.RootGameObject.SetActive(false);
             _vars.Rigidbody.velocity = Vector2.zero;
             _vars.Rigidbody.isKinematic = true;
             _vars.Collider.enabled = false;
-            _vars.DestroyParticle.Play();
+            _vars.DieParticle.Play();
+
+            _vars.RootTransform.gameObject.SetActive(false);
         }
 
         public void Tick()
         {
-            if (_vars.DestroyParticle.isPlaying) return;
-            
-            _finished?.Invoke();
         }
 
         public void FixedTick()
         {
+            if (_vars.DieParticle.isPlaying) return;
+
+            _finished?.Invoke();
         }
 
         public void Exit()

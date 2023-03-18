@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Battle.Projectiles;
 
 namespace Battle
@@ -11,10 +12,9 @@ namespace Battle
 
         private float _strength;
 
-        private StateMachine _stateMachine;
+        private StateMachine _stateMachine = new StateMachine();
 
         private GameObject _gameObject;
-        private Transform _transform;
 
         public void SetStrength(float strength) => _strength = strength;
 
@@ -27,17 +27,34 @@ namespace Battle
 
         public void DeActivate() => _gameObject.SetActive(false);
 
-        public void SetParent(Transform parent) => _transform.SetParent(parent);
+        public void SetParent(Transform parent) => _vars.Transform.SetParent(parent);
 
-        public void SetPosition(Vector3 position) => _transform.position = position;
-        public void SetRotation(Quaternion rotation) => _transform.rotation = rotation;
+        public void SetPosition(Vector3 position) => _vars.Transform.position = position;
+        public void SetRotation(Quaternion rotation) => _vars.Transform.rotation = rotation;
 
-        private void ChangeFlyState() => _stateMachine.ChangeState(new ProjectileFlyState(_vars));
+        private void ChangeFlyState() => _stateMachine.ChangeState(new ProjectileFlyState(_vars, DeActivate));
+        private void ChangeDestroyState() => _stateMachine.ChangeState(new ProjectileDieState(_vars, DeActivate));
+
+        private void FixedUpdate() => _stateMachine.FixedTick();
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.TryGetComponent(out IEnemy enemy))
+            {
+                enemy.TakeDamage(_strength);
+                ChangeDestroyState();
+            }
+        }
+
+        private void OnDisable()
+        {
+            _vars.RootGameObject.SetActive(true);
+        }
 
         private void Awake()
         {
             _gameObject = gameObject;
-            _transform = transform;
+            _vars.Transform = transform;
         }
     }
 }

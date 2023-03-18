@@ -8,6 +8,8 @@ namespace Battle
     {
         public event Action Destroyed;
 
+        public Vector3 Position => _vars.Transform.position;
+        
         [SerializeField] private HeroVars _vars;
 
         private StateMachine _stateMachine = new StateMachine();
@@ -21,6 +23,8 @@ namespace Battle
 
             _vars.AttackTrigger.Init();
             _vars.AttackTrigger.Entered += AttackTrigger_Entered;
+            
+            ChangeDefaultState();
         }
 
         public void UpgradeAttackRadius() => _vars.AttackTrigger.Upgrade();
@@ -35,6 +39,5 @@ namespace Battle
         private void ChangeDefaultState() => _stateMachine.ChangeState(new HeroBaseDefaultState(_vars));
 
         private void Update() => _stateMachine.Tick();
-        private void FixedUpdate() => _stateMachine.FixedTick();
     }
 }
