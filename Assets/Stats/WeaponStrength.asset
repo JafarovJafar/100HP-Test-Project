@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Values>k__BackingField:
   - <Value>k__BackingField: 1
-    <Coast>k__BackingField: 5
+    <Cost>k__BackingField: 5
   - <Value>k__BackingField: 2
-    <Coast>k__BackingField: 25
+    <Cost>k__BackingField: 25
   - <Value>k__BackingField: 3
-    <Coast>k__BackingField: 125
+    <Cost>k__BackingField: 125

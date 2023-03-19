@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Values>k__BackingField:
   - <Value>k__BackingField: 10
-    <Coast>k__BackingField: 5
+    <Cost>k__BackingField: 5
   - <Value>k__BackingField: 12
-    <Coast>k__BackingField: 10
+    <Cost>k__BackingField: 10
   - <Value>k__BackingField: 15
-    <Coast>k__BackingField: 15
+    <Cost>k__BackingField: 15
   - <Value>k__BackingField: 17
-    <Coast>k__BackingField: 20
+    <Cost>k__BackingField: 20

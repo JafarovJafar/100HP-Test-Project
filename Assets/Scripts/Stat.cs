@@ -5,5 +5,5 @@ using UnityEngine;
 public class Stat
 {
     [field: SerializeField] public float Value { get; private set; }
-    [field: SerializeField] public float Coast { get; private set; }
+    [field: SerializeField] public float Cost { get; private set; }
 }
