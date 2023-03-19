@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: WeaponStrength
   m_EditorClassIdentifier: 
   <Values>k__BackingField:
-  - 1
-  - 2
-  - 3
+  - <Value>k__BackingField: 1
+    <Coast>k__BackingField: 5
+  - <Value>k__BackingField: 2
+    <Coast>k__BackingField: 25
+  - <Value>k__BackingField: 3
+    <Coast>k__BackingField: 125

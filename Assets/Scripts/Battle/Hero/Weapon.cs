@@ -28,8 +28,8 @@ namespace Battle.Hero
         {
             _transform = transform;
 
-            _shootInterval = _shootIntervalStats.Values[_currentShootingIntervalLevel];
-            _shootStrength = _strengthStats.Values[_currentStrengthLevel];
+            _shootInterval = _shootIntervalStats.Values[_currentShootingIntervalLevel].Value;
+            _shootStrength = _strengthStats.Values[_currentStrengthLevel].Value;
 
             _reloadWFS = new WaitForSeconds(_shootInterval);
         }
@@ -72,7 +72,7 @@ namespace Battle.Hero
             }
 
             level++;
-            value = stats.Values[level];
+            value = stats.Values[level].Value;
             return true;
         }
 

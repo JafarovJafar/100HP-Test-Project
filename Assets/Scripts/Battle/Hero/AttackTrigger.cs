@@ -20,7 +20,7 @@ namespace Battle.Hero
         {
             _gameObject = gameObject;
 
-            SetRadius(_stats.Values[0]);
+            SetRadius(_stats.Values[0].Value);
         }
 
         public void Activate() => _gameObject.SetActive(true);
@@ -35,7 +35,7 @@ namespace Battle.Hero
             }
 
             _currentLevel++;
-            SetRadius(_stats.Values[_currentLevel]);
+            SetRadius(_stats.Values[_currentLevel].Value);
         }
 
         private void SetRadius(float radius)

@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: WeaponInterval
   m_EditorClassIdentifier: 
   <Values>k__BackingField:
-  - 0.5
-  - 0.4
-  - 0.3
+  - <Value>k__BackingField: 0.5
+    <Coast>k__BackingField: 10
+  - <Value>k__BackingField: 0.4
+    <Coast>k__BackingField: 20
+  - <Value>k__BackingField: 0.3
+    <Coast>k__BackingField: 30
