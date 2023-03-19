@@ -1,7 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public interface IHero : IDamageable, IDestroyable
+namespace Battle
 {
-    Vector3 Position { get; }
+    public interface IHero : IDamageable, IDestroyable
+    {
+        Vector3 Position { get; }
+
+        void UpgradeRange();
+        void UpgradeFrequency();
+        void UpgradeStrength();
+    }
 }

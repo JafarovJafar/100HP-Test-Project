@@ -10,13 +10,15 @@ namespace Battle
         public event Action<float> TakenDamage;
 
         [SerializeField] private EnemyVars _vars;
+        [SerializeField] private float _cost = 1f;
 
         public bool IsActive => _gameObject.activeSelf;
         public Vector3 Position => _vars.Transform.position;
         public bool IsDestroyed => _isDestroyed;
+        public float Cost => _cost;
 
         private float _startHealth;
-        [SerializeField] private bool _isDestroyed;
+        private bool _isDestroyed;
         
         private StateMachine _stateMachine = new StateMachine();
         

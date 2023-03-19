@@ -9,10 +9,12 @@ namespace Battle
 
         private LevelVM _levelVM;
 
+        private Balance _balance = new Balance(10);
+
         private void Start()
         {
-            _model.Init();
-            _view.Init();
+            _model.Init(_balance);
+            _view.Init(_model);
 
             _levelVM = new LevelVM(_model, _view);
         }

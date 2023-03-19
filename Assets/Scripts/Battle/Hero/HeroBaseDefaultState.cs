@@ -25,7 +25,7 @@ namespace Battle.Hero
             float currentDistance;
             IEnemy targetEnemy = null;
             IEnemy currentEnemy;
-            
+
             for (int i = 0; i < _vars.EnemiesInRange.Count; i++)
             {
                 currentEnemy = _vars.EnemiesInRange[i];
@@ -36,7 +36,7 @@ namespace Battle.Hero
                     i--;
                     continue;
                 }
-                
+
                 currentDistance = SqrDistance(currentEnemy.Position, _vars.Transform.position);
 
                 if (currentDistance < minDistance)
@@ -63,7 +63,7 @@ namespace Battle.Hero
         private float SqrDistance(Vector2 first, Vector2 second)
         {
             Vector2 vector = second - first;
-            return vector.x * vector.x + vector.y + vector.y;
+            return vector.x * vector.x + vector.y * vector.y;
         }
     }
 }

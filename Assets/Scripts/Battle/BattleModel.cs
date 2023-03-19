@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Battle
 {
-    public class BattleModel : MonoBehaviour
+    public class BattleModel : MonoBehaviour, IBattleModel
     {
         public event Action Finished;
 
@@ -11,17 +11,38 @@ namespace Battle
         [SerializeField] private EnemiesFactory _enemiesFactory;
         [SerializeField] private EnemiesSpawner _enemiesSpawner;
 
-        public void Init()
+        public IHero Hero => _heroBase;
+        public IBalance Balance => _balance;
+
+        private IBalance _balance;
+
+        public void Init(IBalance balance)
         {
+            _balance = balance;
+
             _heroBase.Init();
             _heroBase.Destroyed += HeroBase_Destroyed;
 
             _enemiesFactory.Init(_heroBase);
             _enemiesSpawner.Init(_enemiesFactory);
+            _enemiesSpawner.EnemySpawned += Enemy_Spawned;
 
             _enemiesSpawner.Activate();
         }
 
+        private void Enemy_Spawned(IEnemy enemy)
+        {
+            enemy.Destroyed += Enemy_Destroyed;
+        }
+
+        private void Enemy_Destroyed(IDestroyable destroyable)
+        {
+            destroyable.Destroyed -= Enemy_Destroyed;
+
+            if (_heroBase.IsDestroyed) return;
+            _balance.AddMoney((destroyable as IEnemy).Cost);
+        }
+        
         private void HeroBase_Destroyed(IDestroyable destroyable)
         {
             _enemiesSpawner.DeActivate();

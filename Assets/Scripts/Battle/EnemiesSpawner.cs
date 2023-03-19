@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace Battle
 {
     public class EnemiesSpawner : MonoBehaviour
     {
+        public event Action<IEnemy> EnemySpawned; 
+
         [SerializeField] private float _spawnInterval = 1f;
         [SerializeField] private SpawnPointsHelper _spawnPointsHelper;
 
@@ -48,6 +51,7 @@ namespace Battle
             enemy.SetRotation(rotation);
             enemy.Destroyed += Enemy_Destroyed;
             _spawnedEnemies.Add(enemy);
+            EnemySpawned?.Invoke(enemy);
         }
 
         private void Enemy_Destroyed(IDestroyable enemy)

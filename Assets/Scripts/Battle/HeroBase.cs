@@ -52,9 +52,9 @@ namespace Battle
             Destroyed?.Invoke(this);
         }
 
-        public void UpgradeAttackRadius() => _vars.AttackTrigger.Upgrade();
-        public void UpgradeAttackFrequency() => _vars.Weapon.UpgradeFrequency();
-        public void UpgradeAttackStrength() => _vars.Weapon.UpgradeStrength();
+        public void UpgradeRange() => _vars.AttackTrigger.Upgrade();
+        public void UpgradeFrequency() => _vars.Weapon.UpgradeFrequency();
+        public void UpgradeStrength() => _vars.Weapon.UpgradeStrength();
 
         private void AttackTrigger_Entered(Enemy enemy)
         {

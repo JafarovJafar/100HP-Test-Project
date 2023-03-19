@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Battle.UI;
 
@@ -6,18 +5,16 @@ namespace Battle
 {
     public class BattleView : MonoBehaviour
     {
-        public event Action UpgradeRangeClicked;
-        public event Action UpgradeFrequencyClicked;
-        public event Action UpgradeStrengthClicked;
-        
+        [SerializeField] private BalanceView _balanceView;
         [SerializeField] private UpgradesView _upgradesView;
 
-        public void Init()
-        {
-            _upgradesView.Init();
-            
-        }
+        public BalanceView BalanceView => _balanceView;
+        public UpgradesView UpgradesView => _upgradesView;
 
-        private void UpgradesView_RangeClicked() => UpgradeRangeClicked?.Invoke();
+        public void Init(IBattleModel battleModel)
+        {
+            _balanceView.Init(battleModel.Balance);
+            _upgradesView.Init(battleModel.Hero, battleModel.Balance);
+        }
     }
 }
