@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-namespace Battle.Hero
+﻿namespace Battle.Hero
 {
     public class HeroBaseDeathState : IState
     {
@@ -17,6 +14,7 @@ namespace Battle.Hero
             _vars.RootGameObject.SetActive(false);
             _vars.DeathParticle.Play();
             _vars.Collider.enabled = false;
+            _vars.AttackTrigger.DeActivate();
         }
 
         public void Tick()

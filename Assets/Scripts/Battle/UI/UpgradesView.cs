@@ -13,8 +13,12 @@ namespace Battle.UI
         [SerializeField] private UpgradeButton _frequencyUpgradeButton;
         [SerializeField] private UpgradeButton _strengthUpgradeButton;
 
-        public void Init(IHero hero, IBalance balance)
+        public void Init(IHero hero, IBalance balance, IAudioManager audioManager)
         {
+            _rangeUpgradeButton.Init(audioManager);
+            _frequencyUpgradeButton.Init(audioManager);
+            _strengthUpgradeButton.Init(audioManager);
+            
             _rangeUpgradeButton.Clicked += RangeUpgrade_Clicked;
             _frequencyUpgradeButton.Clicked += FrequencyUpgrade_Clicked;
             _strengthUpgradeButton.Clicked += StrengthUpgrade_Clicked;

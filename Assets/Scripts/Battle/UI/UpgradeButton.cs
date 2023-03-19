@@ -11,12 +11,20 @@ namespace Battle.UI
 
         private Button _button;
 
-        public void Init()
+        private IAudioManager _audioManager;
+        
+        public void Init(IAudioManager audioManager)
         {
+            _audioManager = audioManager;
+            
             _button = GetComponent<Button>();
             _button.onClick.AddListener(Button_Clicked);
         }
 
-        private void Button_Clicked() => Clicked?.Invoke();
+        private void Button_Clicked()
+        {
+            _audioManager.PlayButtonClick();
+            Clicked?.Invoke();
+        }
     }
 }

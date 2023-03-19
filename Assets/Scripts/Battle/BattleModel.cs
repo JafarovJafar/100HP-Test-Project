@@ -15,10 +15,12 @@ namespace Battle
         public IBalance Balance => _balance;
 
         private IBalance _balance;
+        private IAudioManager _audioManager;
 
-        public void Init(IBalance balance)
+        public void Init(IBalance balance, IAudioManager audioManager)
         {
             _balance = balance;
+            _audioManager = audioManager;
 
             _heroBase.Init();
             _heroBase.Destroyed += HeroBase_Destroyed;

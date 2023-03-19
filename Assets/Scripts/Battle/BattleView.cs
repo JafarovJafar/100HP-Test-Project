@@ -11,10 +11,14 @@ namespace Battle
         public BalanceView BalanceView => _balanceView;
         public UpgradesView UpgradesView => _upgradesView;
 
-        public void Init(IBattleModel battleModel)
+        private IAudioManager _audioManager;
+
+        public void Init(IBattleModel battleModel, IAudioManager audioManager)
         {
+            _audioManager = audioManager;
+
             _balanceView.Init(battleModel.Balance);
-            _upgradesView.Init(battleModel.Hero, battleModel.Balance);
+            _upgradesView.Init(battleModel.Hero, battleModel.Balance, audioManager);
         }
     }
 }
