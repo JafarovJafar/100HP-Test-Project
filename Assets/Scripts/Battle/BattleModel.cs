@@ -6,6 +6,7 @@ namespace Battle
     public class BattleModel : MonoBehaviour, IBattleModel
     {
         public event Action Finished;
+        public event Action HeroDied;
 
         [SerializeField] private HeroBase _heroBase;
         [SerializeField] private EnemiesFactory _enemiesFactory;
@@ -32,6 +33,8 @@ namespace Battle
             _enemiesSpawner.Activate();
         }
 
+        public void Finish() => Finished?.Invoke();
+        
         private void Enemy_Spawned(IEnemy enemy)
         {
             enemy.Destroyed += Enemy_Destroyed;
@@ -44,30 +47,19 @@ namespace Battle
             if (_heroBase.IsDestroyed) return;
             _balance.AddMoney((destroyable as IEnemy).Cost);
         }
-        
+
         private void HeroBase_Destroyed(IDestroyable destroyable)
         {
             _enemiesSpawner.DeActivate();
             _enemiesSpawner.ReleaseAllEnemies();
 
-            Finished?.Invoke();
-        }
-
-        private void Lose()
-        {
-            _enemiesSpawner.DeActivate();
-            foreach (var enemy in _enemiesSpawner.SpawnedEnemies)
-            {
-                enemy.Destroy();
-            }
-
-            Finished?.Invoke();
+            HeroDied?.Invoke();
         }
 
 #if UNITY_EDITOR
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L)) Lose();
+            if (Input.GetKeyDown(KeyCode.L)) HeroBase_Destroyed(_heroBase);
             else if (Input.GetKeyDown(KeyCode.D)) _heroBase.TakeDamage(1f);
         }
 #endif

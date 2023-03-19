@@ -17,7 +17,16 @@ namespace Battle
             _model.Init(_balance, _audioManager);
             _view.Init(_model, _audioManager);
 
+            _model.Finished += Level_Finished;
+            
             _levelVM = new LevelVM(_model, _view);
+        }
+
+        private void Level_Finished()
+        {
+            MonoPool.Instance.ReturnAllItems();
+            // тут же можно отослать ивент аналитики
+            SceneManagerHelper.LoadLobbyScene();
         }
     }
 }

@@ -7,6 +7,8 @@ namespace Battle
             _model = model;
             _view = view;
 
+            _view.RestartClicked += _model.Finish;
+            
             _upgradesVM = new UpgradesVM(model.Hero, view.UpgradesView);
             _balanceVM = new BalanceVM(model.Balance, view.BalanceView);
         }
