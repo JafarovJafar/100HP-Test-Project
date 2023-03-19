@@ -6,10 +6,19 @@ namespace Battle
 {
     public class HeroBase : MonoBehaviour, IHero
     {
+        public event Action Upgraded;
         public event Action<IDestroyable> Destroyed;
         public event Action<float> TakenDamage;
 
         public Vector3 Position => _vars.Transform.position;
+        public Stats AttackRangeStats => _vars.AttackTrigger.Stats;
+        public Stats AttackIntervalStats => _vars.Weapon.IntervalStats;
+        public Stats AttackStrengthStats => _vars.Weapon.StrengthStats;
+
+        public int CurrentAttackRangeLevel => _vars.AttackTrigger.CurrentLevel;
+        public int CurrentAttackIntervalLevel => _vars.Weapon.CurrentIntervalLevel;
+        public int CurrentAttackStrengthLevel => _vars.Weapon.CurrentStrengthLevel;
+
         public bool IsDestroyed => _isDestroyed;
 
         [SerializeField] private HeroVars _vars;
@@ -52,9 +61,23 @@ namespace Battle
             Destroyed?.Invoke(this);
         }
 
-        public void UpgradeRange() => _vars.AttackTrigger.Upgrade();
-        public void UpgradeFrequency() => _vars.Weapon.UpgradeFrequency();
-        public void UpgradeStrength() => _vars.Weapon.UpgradeStrength();
+        public void UpgradeRange()
+        {
+            _vars.AttackTrigger.Upgrade();
+            Upgraded?.Invoke();
+        }
+
+        public void UpgradeFrequency()
+        {
+            _vars.Weapon.UpgradeFrequency();
+            Upgraded?.Invoke();
+        }
+
+        public void UpgradeStrength()
+        {
+            _vars.Weapon.UpgradeStrength();
+            Upgraded?.Invoke();
+        }
 
         private void AttackTrigger_Entered(Enemy enemy)
         {

@@ -12,6 +12,9 @@ namespace Battle.Hero
         [SerializeField] private Transform _spriteTransform;
         [SerializeField] private float _radius;
 
+        public Stats Stats => _stats;
+        public int CurrentLevel => _currentLevel;
+        
         private int _currentLevel;
 
         private GameObject _gameObject;

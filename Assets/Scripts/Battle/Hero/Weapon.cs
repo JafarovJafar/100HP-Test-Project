@@ -9,7 +9,11 @@ namespace Battle.Hero
         [SerializeField] private Stats _strengthStats;
         [SerializeField] private Projectile _projectilePrefab;
 
+        public Stats IntervalStats => _shootIntervalStats;
+        public Stats StrengthStats => _strengthStats;
         public bool IsReloading => _isReloading;
+        public int CurrentIntervalLevel => _currentShootingIntervalLevel;
+        public int CurrentStrengthLevel => _currentStrengthLevel;
 
         private int _currentShootingIntervalLevel;
         private int _currentStrengthLevel;
